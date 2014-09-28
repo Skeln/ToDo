@@ -6,8 +6,29 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-  class SubTask : Task
+  class SubTask
   {
-    public SubTask(int taskID, String subject) : base(taskID, subject) { }
+    public int ID { get; set; }
+    public int MainTaskID { get; set; }
+    public string Subject { get; set; }
+    public bool Done { get; set; }
+
+
+    // Constructors
+    public SubTask(string subject)
+    {
+      this.Subject = subject;
+      this.Done = false;
+    }
+    // Constructor for database parsing
+    public SubTask(int id, int mainTaskID, string subject, bool done)
+    {
+      this.ID = id;
+      this.MainTaskID = mainTaskID;
+      this.Subject = subject;
+      this.Done = done;
+    }
+
+
   }
 }

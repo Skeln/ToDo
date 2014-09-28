@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 namespace Todo
 {
   //class SQLiteDatabase : IDataStorage
-  class SQLiteDatabase
+  class SQLiteDatabaseConnector
   {
 
     private SQLiteConnection dbConnection;
 
-    public SQLiteDatabase()
+    public SQLiteDatabaseConnector()
     {
 
-      //string dbFilename = @"d:\programme\sqlite\test.db";
-      string dbFilename = "ToDo.db";
-
+      //string dbFilename = "ToDo.db";
+      string dbFilename = @"d:\programme\sqlite\test.db";
 
       if (!File.Exists(dbFilename)) { this.setupSQLiteDatabase(dbFilename); }
 
-      this.dbConnection = new SQLiteConnection("Data Source=" + dbFilename + ";Version=3;");
+      this.dbConnection = new SQLiteConnection("Data Source=" + dbFilename + ";foreign keys=true;Version=3;");
       this.dbConnection.Open();
     }
 
@@ -39,12 +38,34 @@ namespace Todo
       if (!sqlData.HasRows) { throw new Exception(String.Format("keine MainTask mit der ID {0} gefunden!", mainTaskID)); }
 
 
+      List<SubTask> subTasks = this.getAllSubTasks(mainTaskID);
       return new MainTask(
         Convert.ToInt32( sqlData["mainTask_id"] ),
         Convert.ToString( sqlData["subject"] ), 
         Convert.ToString( sqlData["description"] ), 
+        subTasks,
         Convert.ToBoolean( sqlData["done"] )
       );
+    }
+
+    private List<SubTask> getAllSubTasks(int mainTaskID)
+    {
+      List<SubTask> subTasks = new List<SubTask>();
+
+      string query = String.Format("select * from SubTasks where mainTask_id = {0}", mainTaskID);
+      SQLiteDataReader sqlData = this.doQuery(query);
+
+      while (sqlData.Read())
+      {
+        subTasks.Add(new SubTask(
+          Convert.ToInt32( sqlData["subTask_id"] ),
+          Convert.ToInt32( sqlData["mainTask_id"] ),
+          Convert.ToString( sqlData["subject"] ),
+          Convert.ToBoolean( sqlData["done"] )
+        ));
+      }
+
+      return subTasks;
     }
 
     
@@ -62,11 +83,11 @@ namespace Todo
     private void setupSQLiteDatabase(string dbFilename)
     {
       SQLiteConnection.CreateFile(dbFilename);
-      SQLiteConnection dbConnection = new SQLiteConnection("Data Source="+dbFilename+";Version=3;");
+      SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFilename + ";foreign keys=true;Version=3;");
       SQLiteCommand command = new SQLiteCommand(dbConnection);
       
-      string activateForeignKeyConstraints = "PRAGMA foreign_keys = ON;";
-      command.CommandText = activateForeignKeyConstraints;
+      // string activateForeignKeyConstraints = "PRAGMA foreign_keys = ON;";
+      // command.CommandText = activateForeignKeyConstraints;
       
       string createMainTaksTable = 
         "CREATE TABLE MainTasks (" +

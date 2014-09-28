@@ -11,16 +11,21 @@ namespace Todo
     static void Main(string[] args)
     {
 
-      MainTask bla = new MainTask(1, "Test123");
+      SQLiteDatabaseConnector dataStorage = new SQLiteDatabaseConnector();
+      MainTask task1 = dataStorage.getMainTask(1);
+      Console.WriteLine(task1.ID);
+      Console.WriteLine(task1.Subject);
+      Console.WriteLine(task1.Description);
+      Console.WriteLine(task1.Done);
+      Console.WriteLine("SubTasks:");
 
-      Console.WriteLine(bla.Subject);
-
-
-      SQLiteDatabase dataStorage = new SQLiteDatabase();
-
-      MainTask blubb = dataStorage.getMainTask(1);
-
-      Console.WriteLine(blubb.Subject);
+      foreach (SubTask subTask in task1.SubTasks)
+      {
+        Console.WriteLine(subTask.ID);
+        Console.WriteLine(subTask.MainTaskID);
+        Console.WriteLine(subTask.Subject);
+        Console.WriteLine(subTask.Done);
+      }
 
     }
   }

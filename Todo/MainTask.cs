@@ -6,51 +6,73 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-  class MainTask : Task
+  class MainTask
   {
-    private List<SubTask> subTasks;
-    public String Description { get; set; }
-
-    public override bool Done
+    public int ID { get; set; }
+    public string Subject { get; set; }
+    public string Description { get; set; }
+    public List<SubTask> SubTasks { get; private set; }
+    private bool _done;
+    public bool Done
     {
+      get { return _done; }
       set
       {
+        _done = value;
         if (value == true)
         {
-          foreach (SubTask subTask in this.subTasks)
+          foreach (SubTask subTask in this.SubTasks)
           {
-            subTask.Done = value;
+            subTask.Done = true;
           }
         }
       }
     }
 
 
-    public MainTask(int taskID, String subject) : base(taskID, subject) { }
-    public MainTask(int taskID, String subject, String description)
-      : base(taskID, subject)
+    // Constructors
+    public MainTask(string subject)
     {
-      this.Description = description;
+      this.Subject = subject;
+      this.SubTasks = new List<SubTask>();
+      this.Done = false;
     }
-    public MainTask(int taskID, String subject, String description, bool done)
-      : base(taskID, subject, done)
+    public MainTask(string subject, string description)
     {
+      this.Subject = subject;
       this.Description = description;
+      this.SubTasks = new List<SubTask>();
+      this.Done = false;
     }
-    
-    public List<SubTask> getSubTasks()
+    // Constructor for database parsing
+    public MainTask(int id, string subject, string description, List<SubTask> subTasks, bool done)
     {
-      return this.subTasks;
+      this.ID = id;
+      this.Subject = subject;
+      this.Description = description;
+      this.SubTasks = subTasks;
+      this.Done = done;
     }
 
-    public void addSubtask(SubTask subTask)
+    // Methods
+    public void addSubtask(string subject)
     {
-      this.subTasks.Add(subTask);
+      SubTask newSubTask = new SubTask(subject);
+      newSubTask.MainTaskID = this.ID;
+      this.SubTasks.Add(newSubTask);
     }
-
-    public void removeSubTask(SubTask subTask)
+    public void removeSubTask(int subTaskID)
     {
-      this.subTasks.Remove(subTask);
+      SubTask foundSubTask = this.SubTasks.Find(
+        delegate(SubTask subTask){
+          return subTask.ID == subTaskID;
+        }
+      );
+
+      if (foundSubTask != null)
+      {
+        this.SubTasks.Remove(foundSubTask);
+      }
     }
   }
 }
