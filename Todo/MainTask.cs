@@ -8,7 +8,7 @@ namespace Todo
 {
   class MainTask
   {
-    public int ID { get; set; }
+    public int ID { get; private set; }
     public string Subject { get; set; }
     public string Description { get; set; }
     public List<SubTask> SubTasks { get; private set; }

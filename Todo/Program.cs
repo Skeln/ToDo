@@ -12,21 +12,50 @@ namespace Todo
     {
 
       SQLiteDatabaseConnector dataStorage = new SQLiteDatabaseConnector();
-      MainTask task1 = dataStorage.getMainTask(1);
-      Console.WriteLine(task1.ID);
-      Console.WriteLine(task1.Subject);
-      Console.WriteLine(task1.Description);
-      Console.WriteLine(task1.Done);
+
+      //MainTask mt = new MainTask("Subject", "Description");
+      //Console.WriteLine(mt.ID);
+
+      //MainTask task1 = dataStorage.getMainTask(1);
+      //printMainTask(task1);
+      //task1.Subject = "all new Subject!";
+      //dataStorage.saveMainTask(task1);
+      //task1 = dataStorage.getMainTask(1);
+      //printMainTask(task1);
+
+
+      //Console.WriteLine("\n\n\n\n\n\n\n");
+      //printMainTaskList(dataStorage.getAllMainTasks());
+
+    
+    }
+
+    static void printMainTaskList(List<MainTask> mainTasks)
+    {
+      foreach (MainTask mainTask in mainTasks)
+      {
+        printMainTask(mainTask);
+      }
+    }
+    
+    static void printMainTask(MainTask mainTask)
+    {
+      Console.WriteLine(mainTask.ID);
+      Console.WriteLine(mainTask.Subject);
+      Console.WriteLine(mainTask.Description);
+      Console.WriteLine(mainTask.Done);
       Console.WriteLine("SubTasks:");
 
-      foreach (SubTask subTask in task1.SubTasks)
+      foreach (SubTask subTask in mainTask.SubTasks)
       {
-        Console.WriteLine(subTask.ID);
-        Console.WriteLine(subTask.MainTaskID);
-        Console.WriteLine(subTask.Subject);
-        Console.WriteLine(subTask.Done);
+        Console.WriteLine("\t" + subTask.ID);
+        Console.WriteLine("\t" + subTask.MainTaskID);
+        Console.WriteLine("\t" + subTask.Subject);
+        Console.WriteLine("\t" + subTask.Done);
       }
 
+      Console.WriteLine("\n\n");
     }
+    
   }
 }

@@ -8,8 +8,8 @@ namespace Todo
 {
   class SubTask
   {
-    public int ID { get; set; }
-    public int MainTaskID { get; set; }
+    public int ID { get; private set; }
+    public int MainTaskID { get; private set; }
     public string Subject { get; set; }
     public bool Done { get; set; }
 

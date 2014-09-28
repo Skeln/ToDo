@@ -9,20 +9,16 @@ namespace Todo
   interface IDataStorage
   {
     void saveMainTask(MainTask mainTask);
-
-    MainTask createMainTask(String subject);
-    MainTask createMainTask(String subject, String description);
+    void saveSubTask(SubTask subTask);
 
     MainTask getMainTask(int mainTaskID);
-
     List<MainTask> getAllMainTasks();
 
-    void checkMainTask(int mainTaskID);
+    //void checkMainTask(int mainTaskID);
+    //void checkSubTask(int subTaskID);
+    //void addSubTaskToTask(int mainTaskID, String subTaskSubject);
 
-    void checkSubTask(int subTaskID);
-
-    void addSubTaskToTask(int mainTaskID, String subTaskSubject);
-
-    void removeSubTask(int subTaskID);
+    void deleteSubTask(int subTaskID);
+    void deleteMainTask(int mainTaskID);
   }
 }

@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-  //class SQLiteDatabase : IDataStorage
-  class SQLiteDatabaseConnector
+  class SQLiteDatabaseConnector : IDataStorage
+  //class SQLiteDatabaseConnector
   {
 
     private SQLiteConnection dbConnection;
 
+    // Constructor
     public SQLiteDatabaseConnector()
     {
-
       //string dbFilename = "ToDo.db";
       string dbFilename = @"d:\programme\sqlite\test.db";
 
@@ -28,17 +28,17 @@ namespace Todo
     }
 
 
-
+    // PUBLIC Methods
     public MainTask getMainTask(int mainTaskID) 
     {
-      string query = String.Format("select * from MainTasks where mainTask_id = {0}", mainTaskID);
+      SQLiteCommand query = new SQLiteCommand("select * from MainTasks where mainTask_id = @mainTaskID");
+      query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
 
       SQLiteDataReader sqlData =  this.doQuery(query);
       sqlData.Read();
       if (!sqlData.HasRows) { throw new Exception(String.Format("keine MainTask mit der ID {0} gefunden!", mainTaskID)); }
 
-
-      List<SubTask> subTasks = this.getAllSubTasks(mainTaskID);
+      List<SubTask> subTasks = this.getAllSubTasksForMainTask(mainTaskID);
       return new MainTask(
         Convert.ToInt32( sqlData["mainTask_id"] ),
         Convert.ToString( sqlData["subject"] ), 
@@ -47,12 +47,133 @@ namespace Todo
         Convert.ToBoolean( sqlData["done"] )
       );
     }
+    public List<MainTask> getAllMainTasks()
+    {
+      List<MainTask> mainTasks = new List<MainTask>();
 
-    private List<SubTask> getAllSubTasks(int mainTaskID)
+      SQLiteCommand query = new SQLiteCommand("select mainTask_id from MainTasks");
+      SQLiteDataReader sqlData = this.doQuery(query);
+
+      while (sqlData.Read())
+      {
+        int mainTaskID = Convert.ToInt32(sqlData["mainTask_id"]);
+        mainTasks.Add( this.getMainTask(mainTaskID) );
+      }
+
+      return mainTasks;
+    }
+    public void deleteMainTask(int mainTaskID)
+    {
+      SQLiteCommand query = new SQLiteCommand("delete from MainTasks where mainTask_id = @mainTaskID");
+      query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
+
+      this.doQuery(query);
+    }
+    public void deleteSubTask(int subTaskID)
+    {
+      SQLiteCommand query = new SQLiteCommand("delete from SubTasks where subTask_id = @subTaskID");
+      query.Parameters.AddWithValue("@subTaskID", subTaskID);
+
+      this.doQuery(query);
+    }
+    public void saveMainTask(MainTask mainTask)
+    {
+      if (mainTask.ID > 0)
+      {
+        this.updateMainTask(mainTask);
+      }
+      else
+      {
+        this.insertMainTask(mainTask);
+      }
+    }
+    public void saveSubTask(SubTask subTask)
+    {
+      if (subTask.ID > 0)
+      {
+        this.updateSubTask(subTask);
+      }
+      else
+      {
+        this.insertSubTask(subTask);
+      }
+    }
+
+
+    // PRIVATE Methods
+    private void updateMainTask(MainTask mainTask)
+    {
+      SQLiteCommand query = new SQLiteCommand(
+        "update MainTasks set " +
+        "subject = @subject," +
+        "description =  @description," +
+        "done = @done "+
+        "where mainTask_id = @mainTaskID"
+      );
+      query.Parameters.AddWithValue("@subject", mainTask.Subject);
+      query.Parameters.AddWithValue("@description", mainTask.Description);
+      query.Parameters.AddWithValue("@done", Convert.ToInt32(mainTask.Done));
+      query.Parameters.AddWithValue("@mainTaskID", mainTask.ID);
+
+      //delete subTasks!
+      //foreach (SubTask subTask in mainTask.SubTasks)
+      //{
+      //  this.updateSubTask(subTask);
+      //}
+
+      this.doQuery(query);        
+    }
+    private void insertMainTask(MainTask mainTask)
+    {
+      SQLiteCommand query = new SQLiteCommand(
+        "insert into MainTasks " +
+        "(subject, description) " +
+        "values " +
+        "(@subject, @description)"
+      );
+      query.Parameters.AddWithValue("@subject", mainTask.Subject);
+      query.Parameters.AddWithValue("@description", mainTask.Description);
+
+      this.doQuery(query);
+    }
+    private void updateSubTask(SubTask subTask)
+    {
+      if (subTask.MainTaskID <= 0) { throw new Exception("MainTask nicht vorhanden!"); }
+
+      SQLiteCommand query = new SQLiteCommand(
+        "update SubTasks set " +
+        "subject = @subject," +
+        "done = @done " +
+        "where subTask_id = @subTaskID"
+      );
+      query.Parameters.AddWithValue("@subject", subTask.Subject);
+      query.Parameters.AddWithValue("@done", subTask.Done);
+      query.Parameters.AddWithValue("@subTaskID", subTask.ID);
+
+      this.doQuery(query);
+    }
+    private void insertSubTask(SubTask subTask)
+    {
+      if (subTask.MainTaskID <= 0) { throw new Exception("MainTask nicht vorhanden!"); }
+
+      SQLiteCommand query = new SQLiteCommand(
+        "insert into SubTasks " +
+        "(subject, mainTask_id) " +
+        "values " +
+        "(@subject, @mainTaskID)"
+      );
+      query.Parameters.AddWithValue("@subject", subTask.Subject);
+      query.Parameters.AddWithValue("@mainTaskID", subTask.MainTaskID);
+
+      this.doQuery(query);
+    }
+    
+    private List<SubTask> getAllSubTasksForMainTask(int mainTaskID)
     {
       List<SubTask> subTasks = new List<SubTask>();
 
-      string query = String.Format("select * from SubTasks where mainTask_id = {0}", mainTaskID);
+      SQLiteCommand query = new SQLiteCommand("select * from SubTasks where mainTask_id = @mainTaskID");
+      query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
       SQLiteDataReader sqlData = this.doQuery(query);
 
       while (sqlData.Read())
@@ -68,18 +189,13 @@ namespace Todo
       return subTasks;
     }
 
-    
-
-
-
-    private SQLiteDataReader doQuery(String query)
+    private SQLiteDataReader doQuery(SQLiteCommand query)
     {
-      SQLiteCommand cmd = new SQLiteCommand(query, this.dbConnection);
-      SQLiteDataReader reader = cmd.ExecuteReader();
+      query.Connection = this.dbConnection;
+      SQLiteDataReader reader = query.ExecuteReader();
 
       return reader;
     }
-
     private void setupSQLiteDatabase(string dbFilename)
     {
       SQLiteConnection.CreateFile(dbFilename);
