@@ -43,5 +43,5 @@ Temporary Items
 .apdisk
 
 # Visual Studio debug Files
-Debug\
-Debug\
+Todo/bin/Debug/*
+Todo/obj/Debug/*
