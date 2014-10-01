@@ -15,9 +15,10 @@ namespace Todo
 
 
     // Constructors
-    public SubTask(string subject)
+    public SubTask(string subject, int mainTaskID)
     {
       this.Subject = subject;
+      this.MainTaskID = mainTaskID;
       this.Done = false;
     }
     // Constructor for database parsing
