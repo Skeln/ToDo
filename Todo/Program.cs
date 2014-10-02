@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Todo
 {
@@ -12,6 +13,7 @@ namespace Todo
     {
 
       SQLiteDatabaseConnector dataStorage = new SQLiteDatabaseConnector();
+      Application.Run(new TaskGUI());
 
       //MainTask mt = new MainTask("Subject", "Description");
       //Console.WriteLine(mt.ID);
