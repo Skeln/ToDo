@@ -9,7 +9,7 @@ namespace Todo
   class SubTask
   {
     public int ID { get; private set; }
-    public int MainTaskID { get; private set; }
+    public int MainTaskID { get; set; }
     public string Subject { get; set; }
     public bool Done { get; set; }
 
@@ -29,7 +29,6 @@ namespace Todo
       this.Subject = subject;
       this.Done = done;
     }
-
 
   }
 }

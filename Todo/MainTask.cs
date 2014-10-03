@@ -55,7 +55,7 @@ namespace Todo
     }
 
     // Methods
-    public void addSubtask(string subject)
+    public void addSubTask(string subject)
     {
       SubTask newSubTask = new SubTask(subject, this.ID);
       this.SubTasks.Add(newSubTask);

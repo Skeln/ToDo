@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 namespace Todo
 {
   class SQLiteDatabaseConnector : IDataStorage
-  //class SQLiteDatabaseConnector
   {
-
     private SQLiteConnection dbConnection;
 
     // Constructor
@@ -76,26 +74,28 @@ namespace Todo
 
       this.doQuery(query);
     }
-    public void saveMainTask(MainTask mainTask)
+    public int saveMainTask(MainTask mainTask)
     {
       if (mainTask.ID > 0)
       {
-        this.updateMainTask(mainTask);
+       this.updateMainTask(mainTask);
+       return mainTask.ID;
       }
       else
       {
-        this.insertMainTask(mainTask);
+        return this.insertMainTask(mainTask);
       }
     }
-    public void saveSubTask(SubTask subTask)
+    public int saveSubTask(SubTask subTask)
     {
       if (subTask.ID > 0)
       {
         this.updateSubTask(subTask);
+        return subTask.ID;
       }
       else
       {
-        this.insertSubTask(subTask);
+        return this.insertSubTask(subTask);
       }
     }
 
@@ -115,15 +115,24 @@ namespace Todo
       query.Parameters.AddWithValue("@done", Convert.ToInt32(mainTask.Done));
       query.Parameters.AddWithValue("@mainTaskID", mainTask.ID);
 
-      //delete subTasks!
-      //foreach (SubTask subTask in mainTask.SubTasks)
-      //{
-      //  this.updateSubTask(subTask);
-      //}
+      //update SubTasks
+      List<int> newSubTaskIDs= new List<int>();
+      foreach (SubTask subTask in mainTask.SubTasks)
+      {
+        newSubTaskIDs.Add(subTask.ID);
+        this.saveSubTask(subTask);
+      }
+      //delete obsolete SubTasks
+      List<int> oldSubTaskIDs = this.getAllSubTaskIDs(mainTask.ID);
+      IEnumerable<int> obsoleteSubTaskIDs = oldSubTaskIDs.Except(newSubTaskIDs);
+      foreach (int obsoleteSubTaskID in obsoleteSubTaskIDs)
+      {
+        this.deleteSubTask(obsoleteSubTaskID);
+      }
 
       this.doQuery(query);        
     }
-    private void insertMainTask(MainTask mainTask)
+    private int insertMainTask(MainTask mainTask)
     {
       SQLiteCommand query = new SQLiteCommand(
         "insert into MainTasks " +
@@ -135,6 +144,21 @@ namespace Todo
       query.Parameters.AddWithValue("@description", mainTask.Description);
 
       this.doQuery(query);
+
+      // get new ID
+      SQLiteCommand id_query = new SQLiteCommand("select last_insert_rowid() as id from MainTasks");
+      SQLiteDataReader sqlData = this.doQuery(id_query);
+      sqlData.Read();
+      int mainTaskID = Convert.ToInt32(sqlData["id"]);
+
+      // inser all SubTasks
+      foreach (SubTask subTask in mainTask.SubTasks)
+      {
+        subTask.MainTaskID = mainTaskID;
+        this.insertSubTask(subTask);
+      }
+      
+      return mainTaskID;
     }
     private void updateSubTask(SubTask subTask)
     {
@@ -152,7 +176,7 @@ namespace Todo
 
       this.doQuery(query);
     }
-    private void insertSubTask(SubTask subTask)
+    private int insertSubTask(SubTask subTask)
     {
       if (subTask.MainTaskID <= 0) { throw new Exception("MainTask nicht vorhanden!"); }
 
@@ -166,8 +190,13 @@ namespace Todo
       query.Parameters.AddWithValue("@mainTaskID", subTask.MainTaskID);
 
       this.doQuery(query);
+
+      // get new ID
+      SQLiteCommand id_query = new SQLiteCommand("select last_insert_rowid() as id from SubTasks");
+      SQLiteDataReader sqlData = this.doQuery(id_query);
+      sqlData.Read();
+      return Convert.ToInt32(sqlData["id"]);
     }
-    
     private List<SubTask> getAllSubTasksForMainTask(int mainTaskID)
     {
       List<SubTask> subTasks = new List<SubTask>();
@@ -188,6 +217,25 @@ namespace Todo
 
       return subTasks;
     }
+    private List<int> getAllSubTaskIDs(int mainTaskID)
+    {
+      List<int> subTaskIDs = new List<int>();
+
+      SQLiteCommand query = new SQLiteCommand(
+        "select subTask_id from SubTasks " +
+        "where mainTask_id = @mainTaskID"
+      );
+      query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
+
+      SQLiteDataReader sqlData = this.doQuery(query);
+      while (sqlData.Read())
+      {
+        subTaskIDs.Add(Convert.ToInt32(sqlData["subTask_id"]));
+      }
+
+      return subTaskIDs;
+    }
+
 
     private SQLiteDataReader doQuery(SQLiteCommand query)
     {
