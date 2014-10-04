@@ -15,6 +15,7 @@ namespace Todo
 
         // TODO: This needs to be replaced with the actual TaskController
         private TestTaskController testTasksController;
+        private Form taskForm;
 
         public TodoGUI()
         {
@@ -72,6 +73,24 @@ namespace Todo
         private void FocusPanel(object sender, MouseEventArgs e)
         {
             mainTaskPanel.Focus();
+        }
+
+        /// <summary>
+        /// Opens a dialog to create a new Form
+        /// </summary>
+        private void addTaskButton_Click(object sender, EventArgs e)
+        {
+
+            if (taskForm == null || taskForm.IsDisposed )
+            {
+                taskForm = new MainTaskForm("New Task");
+            }
+            else 
+            { 
+            
+            }
+
+            taskForm.ShowDialog();
         }
 
     }
