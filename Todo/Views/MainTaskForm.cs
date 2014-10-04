@@ -37,6 +37,10 @@ namespace Todo
             _mainTask = mt;
 
         }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

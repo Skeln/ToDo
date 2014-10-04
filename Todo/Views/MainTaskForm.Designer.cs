@@ -77,6 +77,7 @@
             // 
             // saveMainTaskBtn
             // 
+            this.saveMainTaskBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveMainTaskBtn.Location = new System.Drawing.Point(201, 224);
             this.saveMainTaskBtn.Name = "saveMainTaskBtn";
             this.saveMainTaskBtn.Size = new System.Drawing.Size(75, 23);
@@ -86,12 +87,14 @@
             // 
             // cancelBtn
             // 
+            this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelBtn.Location = new System.Drawing.Point(120, 224);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 5;
             this.cancelBtn.Text = "cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // shapeContainer1
             // 
