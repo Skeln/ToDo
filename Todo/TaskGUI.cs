@@ -10,8 +10,9 @@ using System.Windows.Forms;
 
 namespace Todo
 {
-    public partial class TaskGUI : Form
+    partial class TaskGUI : Form
     {
+
         // TODO: This needs to be replaced with the actual TaskController
         private TestTaskController testTasksController;
 
@@ -32,5 +33,47 @@ namespace Todo
             InitializeControls();
 
         }
+
+        /// <summary>
+        /// Adds a main task control for each task to the main task panel
+        /// </summary>
+        public void InitializeControls()
+        {
+
+            Console.WriteLine(testTasksController.Tasks.Count);
+
+            testTasksController.Tasks.ForEach(delegate(MainTask m)
+            {
+                addMainTaskComponent(m);
+            });
+
+            mainTaskPanel.Focus();
+
+        }
+
+        /// <summary>
+        /// Gets called by Initilize Controls to create the main task control 
+        /// for given main task object
+        /// </summary>
+        /// <param name="m">main task object to display</param>
+        void addMainTaskComponent(MainTask m)
+        {
+
+            MainTaskControl mtc = new MainTaskControl(m);
+            mtc.Dock = DockStyle.Top;
+            mainTaskPanel.Controls.Add(mtc);
+
+        }
+
+        private void FocusPanel(object sender, EventArgs e)
+        {
+            mainTaskPanel.Focus();
+        }
+
+        private void FocusPanel(object sender, MouseEventArgs e)
+        {
+            mainTaskPanel.Focus();
+        }
+
     }
 }
