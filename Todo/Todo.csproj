@@ -68,11 +68,11 @@
     <Compile Include="SubTaskControl.Designer.cs">
       <DependentUpon>SubTaskControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskGUI.cs">
+    <Compile Include="TodoGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaskGUI.Designer.cs">
-      <DependentUpon>TaskGUI.cs</DependentUpon>
+    <Compile Include="TodoGUI.Designer.cs">
+      <DependentUpon>TodoGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="IDataStorage.cs" />
     <Compile Include="MainTask.cs" />
@@ -96,8 +96,8 @@
     <EmbeddedResource Include="SubTaskControl.resx">
       <DependentUpon>SubTaskControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskGUI.resx">
-      <DependentUpon>TaskGUI.cs</DependentUpon>
+    <EmbeddedResource Include="TodoGUI.resx">
+      <DependentUpon>TodoGUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
