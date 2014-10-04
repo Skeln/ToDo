@@ -12,10 +12,31 @@ namespace Todo
 {
     partial class MainTaskForm : Form
     {
-        public MainTaskForm(string windowTitle)
+        private MainTask _mainTask = null;
+
+        /// <summary>
+        /// This constructor is used for creating a new MainTask
+        /// </summary>
+        public MainTaskForm()
         {
+
             InitializeComponent();
-            this.Text = windowTitle;
+            this.Text = "New Task";
+
+        }
+
+        /// <summary>
+        /// This constructor is used for editing an existing MainTask
+        /// </summary>
+        /// <param name="mt">the MainTask object which should be edited</param>
+        public MainTaskForm(MainTask mt)
+        {
+
+            InitializeComponent();
+            this.Text = "Edit Task";
+            _mainTask = mt;
+
+        }
         }
     }
 }

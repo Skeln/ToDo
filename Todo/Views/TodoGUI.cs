@@ -88,14 +88,11 @@ namespace Todo
 
             if (taskForm == null || taskForm.IsDisposed )
             {
-                taskForm = new MainTaskForm("New Task");
-            }
-            else 
-            { 
-            
+                taskForm = new MainTaskForm();
             }
 
             taskForm.ShowDialog();
+
         }
 
     }
