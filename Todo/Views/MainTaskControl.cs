@@ -12,6 +12,17 @@ namespace Todo
 {
     partial class MainTaskControl : UserControl
     {
+
+        private MainTask _mainTask;
+        
+        public MainTask ControlMainTask 
+        {
+            get
+            {
+                return _mainTask;
+            }
+        }
+
         public MainTaskControl()
         {
             InitializeComponent();
@@ -20,7 +31,17 @@ namespace Todo
         public MainTaskControl(MainTask m)
         {
             InitializeComponent();
-            taskName.Text = m.Subject;
+            _mainTask = m;
+            SetValues();
         }
+
+        /// <summary>
+        /// Fills all GUI field with the Main Tasks Values
+        /// </summary>
+        private void SetValues() 
+        { 
+            taskName.Text = ControlMainTask.Subject;
+        }
+
     }
 }

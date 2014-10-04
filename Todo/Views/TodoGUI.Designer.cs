@@ -49,6 +49,7 @@
             this.addTaskButton.TabIndex = 0;
             this.addTaskButton.Text = "Add task";
             this.addTaskButton.UseVisualStyleBackColor = false;
+            this.addTaskButton.Click += new System.EventHandler(this.addTaskButton_Click);
             // 
             // mainTaskPanel
             // 
@@ -82,7 +83,7 @@
             this.lineShape1.Y1 = 52;
             this.lineShape1.Y2 = 53;
             // 
-            // TaskGUI
+            // TodoGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -92,7 +93,7 @@
             this.Controls.Add(this.addTaskButton);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "TaskGUI";
+            this.Name = "TodoGUI";
             this.Text = "ToDo-Application";
             this.MouseEnter += new System.EventHandler(this.FocusPanel);
             this.MouseHover += new System.EventHandler(this.FocusPanel);
