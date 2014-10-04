@@ -49,6 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainTaskControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainTaskControl.Designer.cs">
+      <DependentUpon>MainTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubTaskControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubTaskControl.Designer.cs">
+      <DependentUpon>SubTaskControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,14 +73,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteDatabaseConnector.cs" />
     <Compile Include="SubTask.cs" />
+    <Compile Include="TestTaskController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MainTaskControl.resx">
+      <DependentUpon>MainTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubTaskControl.resx">
+      <DependentUpon>SubTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskGUI.resx">
       <DependentUpon>TaskGUI.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
