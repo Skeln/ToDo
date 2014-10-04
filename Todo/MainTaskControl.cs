@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Todo
 {
-    public partial class MainTaskControl : UserControl
+    partial class MainTaskControl : UserControl
     {
         public MainTaskControl()
         {
             InitializeComponent();
+        }
+
+        public MainTaskControl(MainTask m)
+        {
+            InitializeComponent();
+            taskName.Text = m.Subject;
         }
     }
 }
