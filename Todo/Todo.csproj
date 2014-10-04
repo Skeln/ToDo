@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainTaskControl.cs">
+    <Compile Include="Views\MainTaskControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainTaskControl.Designer.cs">
+    <Compile Include="Views\MainTaskControl.Designer.cs">
       <DependentUpon>MainTaskControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -62,16 +62,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SubTaskControl.cs">
+    <Compile Include="Views\MainTaskForm.cs">
+      <SubType>Form</SubType>
+      <CustomToolNamespace>Todo</CustomToolNamespace>
+    </Compile>
+    <Compile Include="Views\MainTaskForm.Designer.cs">
+      <DependentUpon>MainTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubTaskControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SubTaskControl.Designer.cs">
+    <Compile Include="Views\SubTaskControl.Designer.cs">
       <DependentUpon>SubTaskControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TodoGUI.cs">
+    <Compile Include="Views\TodoGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TodoGUI.Designer.cs">
+    <Compile Include="Views\TodoGUI.Designer.cs">
       <DependentUpon>TodoGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="IDataStorage.cs" />
@@ -86,17 +93,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainTaskControl.resx">
+    <EmbeddedResource Include="Views\MainTaskControl.resx">
       <DependentUpon>MainTaskControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubTaskControl.resx">
+    <EmbeddedResource Include="Views\MainTaskForm.resx">
+      <DependentUpon>MainTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SubTaskControl.resx">
       <DependentUpon>SubTaskControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TodoGUI.resx">
+    <EmbeddedResource Include="Views\TodoGUI.resx">
       <DependentUpon>TodoGUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
