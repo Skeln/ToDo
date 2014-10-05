@@ -121,5 +121,13 @@ namespace Todo
             CheckBoxChange();
         }
 
+        private void removeTaskBtn_Click(object sender, EventArgs e)
+        {
+
+            // TODO: call remove Controller Task
+            this.Dispose();
+
+        }
+
     }
 }

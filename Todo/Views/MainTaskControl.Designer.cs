@@ -90,6 +90,7 @@
             this.removeTaskBtn.TabIndex = 3;
             this.removeTaskBtn.Text = "-";
             this.removeTaskBtn.UseVisualStyleBackColor = false;
+            this.removeTaskBtn.Click += new System.EventHandler(this.removeTaskBtn_Click);
             // 
             // addSubTaskBtn
             // 
