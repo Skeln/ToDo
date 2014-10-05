@@ -69,6 +69,7 @@ namespace Todo
             mtc.Dock            = DockStyle.Top;
             
             mainTaskPanel.Controls.Add(mtc);
+            mainTaskPanel.Controls.SetChildIndex(mtc, 0);
 
         }
 

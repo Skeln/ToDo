@@ -112,6 +112,7 @@ namespace Todo
             if (((CheckBox)sender).Checked)
             {
                 this.CtrlMainTask.Done = true;
+                this.Parent.Controls.SetChildIndex(this, this.Parent.Controls.Count - 1);
             }
             else
             { 
