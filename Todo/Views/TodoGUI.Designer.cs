@@ -53,6 +53,9 @@
             // 
             // mainTaskPanel
             // 
+            this.mainTaskPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainTaskPanel.AutoScroll = true;
             this.mainTaskPanel.BackColor = System.Drawing.SystemColors.Control;
             this.mainTaskPanel.Location = new System.Drawing.Point(12, 64);

@@ -48,15 +48,22 @@ namespace Todo
 
         private void saveMainTaskBtn_Click(object sender, EventArgs e)
         {
-            
+
             if (_mainTaskControl != null)
             {
 
-                MainTask mt                  = _mainTaskControl.CtrlMainTask;
-                mt.Subject     = this.subjectTextBox.Text ;
+                MainTask mt    = _mainTaskControl.CtrlMainTask;
+                mt.Subject     = this.subjectTextBox.Text;
                 mt.Description = this.descriptionTextBox.Text;
                 _mainTaskControl.Update();
 
+            }
+            else 
+            { 
+                //TODO: this should go into the controller 
+                MainTask mt = new MainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
+                
+                TodoGUI.Instance.AddMainTaskComponent(mt);
             }
 
             this.Dispose();
