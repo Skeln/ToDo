@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.subjectLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.subjectTextBox = new System.Windows.Forms.TextBox();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.saveMainTaskBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
@@ -47,12 +47,12 @@
             this.subjectLabel.TabIndex = 0;
             this.subjectLabel.Text = "Subject";
             // 
-            // textBox1
+            // subjectTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(63, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 20);
-            this.textBox1.TabIndex = 1;
+            this.subjectTextBox.Location = new System.Drawing.Point(63, 10);
+            this.subjectTextBox.Name = "subjectTextBox";
+            this.subjectTextBox.Size = new System.Drawing.Size(213, 20);
+            this.subjectTextBox.TabIndex = 1;
             // 
             // descriptionLabel
             // 
@@ -63,17 +63,17 @@
             this.descriptionLabel.TabIndex = 2;
             this.descriptionLabel.Text = "Description";
             // 
-            // textBox2
+            // descriptionTextBox
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(16, 62);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(260, 147);
-            this.textBox2.TabIndex = 3;
+            this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.descriptionTextBox.Location = new System.Drawing.Point(16, 62);
+            this.descriptionTextBox.Multiline = true;
+            this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.Size = new System.Drawing.Size(260, 147);
+            this.descriptionTextBox.TabIndex = 3;
             // 
             // saveMainTaskBtn
             // 
@@ -84,6 +84,7 @@
             this.saveMainTaskBtn.TabIndex = 4;
             this.saveMainTaskBtn.Text = "save";
             this.saveMainTaskBtn.UseVisualStyleBackColor = true;
+            this.saveMainTaskBtn.Click += new System.EventHandler(this.saveMainTaskBtn_Click);
             // 
             // cancelBtn
             // 
@@ -124,9 +125,9 @@
             this.ClientSize = new System.Drawing.Size(288, 259);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.saveMainTaskBtn);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.descriptionLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.subjectTextBox);
             this.Controls.Add(this.subjectLabel);
             this.Controls.Add(this.shapeContainer1);
             this.Name = "MainTaskForm";
@@ -139,9 +140,9 @@
         #endregion
 
         private System.Windows.Forms.Label subjectLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox subjectTextBox;
         private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.Button saveMainTaskBtn;
         private System.Windows.Forms.Button cancelBtn;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;

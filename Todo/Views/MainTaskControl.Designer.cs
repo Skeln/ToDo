@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.taskName = new System.Windows.Forms.Label();
-            this.taskDescription = new System.Windows.Forms.TextBox();
+            this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.checkDoneCkBx = new System.Windows.Forms.CheckBox();
             this.removeTaskBtn = new System.Windows.Forms.Button();
             this.addSubTaskBtn = new System.Windows.Forms.Button();
@@ -42,33 +42,38 @@
             // taskName
             // 
             this.taskName.AutoSize = true;
+            this.taskName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.taskName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.taskName.Location = new System.Drawing.Point(9, 10);
             this.taskName.Name = "taskName";
             this.taskName.Size = new System.Drawing.Size(45, 19);
             this.taskName.TabIndex = 0;
             this.taskName.Text = "Task";
+            this.taskName.Click += new System.EventHandler(this.editMainTask_click);
             // 
-            // taskDescription
+            // descriptionTextBox
             // 
-            this.taskDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.taskDescription.Location = new System.Drawing.Point(12, 43);
-            this.taskDescription.Name = "taskDescription";
-            this.taskDescription.Size = new System.Drawing.Size(554, 20);
-            this.taskDescription.TabIndex = 1;
+            this.descriptionTextBox.Location = new System.Drawing.Point(12, 43);
+            this.descriptionTextBox.Multiline = true;
+            this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.ReadOnly = true;
+            this.descriptionTextBox.Size = new System.Drawing.Size(556, 20);
+            this.descriptionTextBox.TabIndex = 1;
             // 
             // checkDoneCkBx
             // 
             this.checkDoneCkBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkDoneCkBx.AutoSize = true;
             this.checkDoneCkBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkDoneCkBx.Location = new System.Drawing.Point(506, 11);
+            this.checkDoneCkBx.Location = new System.Drawing.Point(508, 11);
             this.checkDoneCkBx.Name = "checkDoneCkBx";
             this.checkDoneCkBx.Size = new System.Drawing.Size(60, 20);
             this.checkDoneCkBx.TabIndex = 2;
             this.checkDoneCkBx.Text = "Done";
             this.checkDoneCkBx.UseVisualStyleBackColor = true;
+            this.checkDoneCkBx.CheckedChanged += new System.EventHandler(this.checkDoneCkBx_CheckedChanged);
             // 
             // removeTaskBtn
             // 
@@ -79,7 +84,7 @@
             this.removeTaskBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeTaskBtn.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeTaskBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.removeTaskBtn.Location = new System.Drawing.Point(470, 6);
+            this.removeTaskBtn.Location = new System.Drawing.Point(472, 6);
             this.removeTaskBtn.Name = "removeTaskBtn";
             this.removeTaskBtn.Size = new System.Drawing.Size(30, 30);
             this.removeTaskBtn.TabIndex = 3;
@@ -95,7 +100,7 @@
             this.addSubTaskBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addSubTaskBtn.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addSubTaskBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.addSubTaskBtn.Location = new System.Drawing.Point(434, 6);
+            this.addSubTaskBtn.Location = new System.Drawing.Point(436, 6);
             this.addSubTaskBtn.Name = "addSubTaskBtn";
             this.addSubTaskBtn.Size = new System.Drawing.Size(30, 30);
             this.addSubTaskBtn.TabIndex = 4;
@@ -107,9 +112,10 @@
             this.SubTaskPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubTaskPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.SubTaskPanel.Location = new System.Drawing.Point(12, 70);
             this.SubTaskPanel.Name = "SubTaskPanel";
-            this.SubTaskPanel.Size = new System.Drawing.Size(554, 44);
+            this.SubTaskPanel.Size = new System.Drawing.Size(556, 63);
             this.SubTaskPanel.TabIndex = 5;
             // 
             // subTaskBindingSource
@@ -121,16 +127,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.SubTaskPanel);
             this.Controls.Add(this.addSubTaskBtn);
             this.Controls.Add(this.removeTaskBtn);
             this.Controls.Add(this.checkDoneCkBx);
-            this.Controls.Add(this.taskDescription);
+            this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.taskName);
             this.DoubleBuffered = true;
             this.Name = "MainTaskControl";
-            this.Size = new System.Drawing.Size(583, 126);
+            this.Size = new System.Drawing.Size(585, 145);
             ((System.ComponentModel.ISupportInitialize)(this.subTaskBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -140,7 +146,7 @@
         #endregion
 
         private System.Windows.Forms.Label taskName;
-        private System.Windows.Forms.TextBox taskDescription;
+        private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.CheckBox checkDoneCkBx;
         private System.Windows.Forms.Button removeTaskBtn;
         private System.Windows.Forms.Button addSubTaskBtn;
