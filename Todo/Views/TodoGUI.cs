@@ -34,8 +34,10 @@ namespace Todo
         {
 
             InitializeComponent();
-            _instance = this;
+
+            _instance           = this;
             testTasksController = t;
+
             InitializeControls();
 
         }
@@ -55,17 +57,17 @@ namespace Todo
 
         }
 
-
         /// <summary>
         /// Gets called by Initilize Controls to create the main task control 
         /// for given main task object
         /// </summary>
         /// <param name="m">main task object to display</param>
-        void AddMainTaskComponent(MainTask m)
+        public void AddMainTaskComponent(MainTask m)
         {
 
             MainTaskControl mtc = new MainTaskControl(m);
-            mtc.Dock = DockStyle.Top;
+            mtc.Dock            = DockStyle.Top;
+            
             mainTaskPanel.Controls.Add(mtc);
 
         }
