@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-  interface IDataStorage
-  {
-    int saveMainTask(MainTask mainTask);
-    int saveSubTask(SubTask subTask);
+    interface IDataStorage
+    {
+        int saveMainTask(MainTask mainTask);
+        int saveSubTask(SubTask subTask);
 
 
-    MainTask getMainTask(int mainTaskID);
-    List<MainTask> getAllMainTasks();
+        MainTask getMainTask(int mainTaskID);
+        List<MainTask> getAllMainTasks();
 
-    void deleteSubTask(int subTaskID);
-    void deleteMainTask(int mainTaskID);
-  }
+        void deleteSubTask(int subTaskID);
+        void deleteMainTask(int mainTaskID);
+    }
 }
