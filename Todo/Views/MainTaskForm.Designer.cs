@@ -46,6 +46,7 @@
             this.subjectLabel.Size = new System.Drawing.Size(43, 13);
             this.subjectLabel.TabIndex = 0;
             this.subjectLabel.Text = "Subject";
+            this.subjectLabel.Click += new System.EventHandler(this.subjectLabel_Click);
             // 
             // subjectTextBox
             // 
@@ -53,6 +54,7 @@
             this.subjectTextBox.Name = "subjectTextBox";
             this.subjectTextBox.Size = new System.Drawing.Size(213, 20);
             this.subjectTextBox.TabIndex = 1;
+            this.subjectTextBox.TextChanged += new System.EventHandler(this.subjectTextBox_TextChanged);
             // 
             // descriptionLabel
             // 

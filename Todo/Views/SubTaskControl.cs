@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Todo
 {
-    public partial class SubTaskControl : UserControl
+    partial class SubTaskControl : UserControl
     {
-        public SubTaskControl()
+
+        public SubTaskControl(SubTask s)
         {
             InitializeComponent();
         }
+
     }
 }

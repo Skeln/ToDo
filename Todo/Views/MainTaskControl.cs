@@ -32,8 +32,11 @@ namespace Todo
         {
             InitializeComponent();
             _mainTask = m;
-            CheckBoxChange();
             SetValues();
+            foreach (SubTask s in m.SubTasks) 
+            {
+                AddSubTaskComponent(s);
+            }
         }
 
         /// <summary>
@@ -79,7 +82,7 @@ namespace Todo
 
             if (CtrlMainTask.Done)
             {
-                CheckBoxChange();
+                this.BackColor = Color.LightGreen;
                 checkDoneCkBx.Checked = true;
             }
             
@@ -87,18 +90,20 @@ namespace Todo
             descriptionTextBox.Text = CtrlMainTask.Description; 
         }
 
-        private void CheckBoxChange() 
-        { 
+        /// <summary>
+        /// Gets called by Initilize Controls to create the sub task controls 
+        /// for given main tasks subtasks
+        /// </summary>
+        /// <param name="m">sub task object to display</param>
+        public void AddSubTaskComponent(SubTask subTask)
+        {
 
-            if (CtrlMainTask.Done)
-            {
-                this.BackColor = Color.LightGreen;
-            }
-            else
-            { 
-                this.BackColor = Color.LightGray;
-            }
-        
+            SubTaskControl stc  = new SubTaskControl(subTask);
+            stc.Dock            = DockStyle.Top;
+            
+            this.SubTaskPanel.Controls.Add(stc);
+            this.SubTaskPanel.Controls.SetChildIndex(stc, 0);
+
         }
 
         private void editMainTask_click(object sender, EventArgs e)
@@ -112,14 +117,23 @@ namespace Todo
             if (((CheckBox)sender).Checked)
             {
                 this.CtrlMainTask.Done = true;
-                this.Parent.Controls.SetChildIndex(this, this.Parent.Controls.Count - 1);
+                // Reorders the current MainTaskComponent
+                //this.Parent.Controls.SetChildIndex(this, this.Parent.Controls.Count - 1);
             }
             else
             { 
                 this.CtrlMainTask.Done = false;
             }
 
-            CheckBoxChange();
+            if (CtrlMainTask.Done)
+            {
+                this.BackColor = Color.LightGreen;
+            }
+            else
+            { 
+                this.BackColor = Color.LightGray;
+            }
+
         }
 
         private void removeTaskBtn_Click(object sender, EventArgs e)
@@ -128,6 +142,12 @@ namespace Todo
             // TODO: call remove Controller Task
             this.Dispose();
 
+        }
+
+        private void addSubTaskBtn_Click(object sender, EventArgs e)
+        {
+            Views.SubTaskForm stf = new Views.SubTaskForm(this);
+            stf.ShowDialog();
         }
 
     }

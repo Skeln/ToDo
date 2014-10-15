@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.taskName = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.checkDoneCkBx = new System.Windows.Forms.CheckBox();
             this.removeTaskBtn = new System.Windows.Forms.Button();
             this.addSubTaskBtn = new System.Windows.Forms.Button();
             this.SubTaskPanel = new System.Windows.Forms.Panel();
-            this.subTaskBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.subTaskBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // taskName
@@ -107,6 +104,7 @@
             this.addSubTaskBtn.TabIndex = 4;
             this.addSubTaskBtn.Text = "+";
             this.addSubTaskBtn.UseVisualStyleBackColor = false;
+            this.addSubTaskBtn.Click += new System.EventHandler(this.addSubTaskBtn_Click);
             // 
             // SubTaskPanel
             // 
@@ -118,10 +116,6 @@
             this.SubTaskPanel.Name = "SubTaskPanel";
             this.SubTaskPanel.Size = new System.Drawing.Size(556, 63);
             this.SubTaskPanel.TabIndex = 5;
-            // 
-            // subTaskBindingSource
-            // 
-            this.subTaskBindingSource.DataSource = typeof(Todo.SubTask);
             // 
             // MainTaskControl
             // 
@@ -138,7 +132,6 @@
             this.DoubleBuffered = true;
             this.Name = "MainTaskControl";
             this.Size = new System.Drawing.Size(585, 145);
-            ((System.ComponentModel.ISupportInitialize)(this.subTaskBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,7 +144,6 @@
         private System.Windows.Forms.CheckBox checkDoneCkBx;
         private System.Windows.Forms.Button removeTaskBtn;
         private System.Windows.Forms.Button addSubTaskBtn;
-        private System.Windows.Forms.BindingSource subTaskBindingSource;
         private System.Windows.Forms.Panel SubTaskPanel;
     }
 }
