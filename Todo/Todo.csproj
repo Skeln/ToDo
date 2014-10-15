@@ -41,7 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\sqlite-netFx45-binary-bundle-Win32-2012-1.0.94.0\System.Data.SQLite.dll</HintPath>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITodoController.cs" />
+    <Compile Include="TaskController.cs" />
     <Compile Include="Views\MainTaskControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
