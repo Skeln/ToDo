@@ -9,19 +9,19 @@ namespace Todo
     interface ITodoController
     {
 
-        int saveMainTask(string subject, string description);
-        int saveMainTask(int id, string subject, string description);
-        int saveSubTask(string subject);
-        int saveSubTask(int id, string subject);
+        int SaveMainTask(string subject, string description);
+        int SaveMainTask(int id, string subject, string description);
+        int SaveSubTask(string subject);
+        int SaveSubTask(int id, string subject);
 
-        List<MainTask> getAllMainTasks();
+        List<MainTask> GetAllMainTasks();
 
-        void checkMainTask(int id);
-        void checkSubTask(int id);
+        void CheckMainTask(int id);
+        void CheckSubTask(int id);
 
-        void deleteSubTask(int subTaskID);
-        void deleteMainTask(int mainTaskID);
-        void deleteAllTasks();
+        void DeleteSubTask(int subTaskID);
+        void DeleteMainTask(int mainTaskID);
+        void DeleteAllTasks();
 
     }
 }
