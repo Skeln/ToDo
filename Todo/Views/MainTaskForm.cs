@@ -61,9 +61,8 @@ namespace Todo
             else 
             { 
                 //TODO: this should go into the controller 
-                MainTask mt = new MainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
-                
-                TodoGUI.Instance.AddMainTaskComponent(mt);
+                int mainTaskId = TodoGUI.Instance.GetTodoController.SaveMainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
+                TodoGUI.Instance.UpdateControls(mainTaskId);
             }
 
             this.Dispose();
