@@ -11,7 +11,7 @@ namespace Todo
 
         int SaveMainTask(string subject, string description);
         int SaveMainTask(int id, string subject, string description);
-        int SaveSubTask(string subject);
+        int SaveSubTask(string subject, int mainTaskID);
         int SaveSubTask(int id, string subject);
 
         List<MainTask> GetAllMainTasks();

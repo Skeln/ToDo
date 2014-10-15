@@ -74,7 +74,7 @@ namespace Todo
         }
 
 
-        public int SaveSubTask(string subject)
+        public int SaveSubTask(string subject, int mainTaskID)
         {
             return 0;
         }
