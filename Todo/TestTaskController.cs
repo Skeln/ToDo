@@ -13,49 +13,89 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-  class TestTaskController
-  {
-      private List<MainTask> _Tasks = null;
+    class TestTaskController : ITodoController
+    {
 
-      public List<MainTask> Tasks
-      {
-          get
-          {
+        #region old
+        private List<MainTask> _Tasks = null;
 
-              if (_Tasks == null)
-              {
-                  this._Tasks = new List<MainTask>();
-                  createTasks();
-              }
+        public List<MainTask> Tasks
+        {
+            get
+            {
 
-              return this._Tasks;
+                if (_Tasks == null)
+                {
+                    this._Tasks = new List<MainTask>();
+                    createTasks();
+                }
 
-          }
-      }
+                return this._Tasks;
 
-      public void createMainTask(string subject)
-      {
+            }
+        }
 
-      }
 
-      public void createMainTask(string subject, string description)
-      {
+        public void createMainTask(string subject)
+        {
 
-      }
+        }
 
-      /// <summary>
-      /// creates 5 test tasks and adds them to the tasks list
-      /// </summary>
-      public void createTasks()
-      {
+        public void createMainTask(string subject, string description)
+        {
 
-          for (int i = 0; i < 10; i++)
-          {
-              _Tasks.Add(new MainTask("Task " + (i + 1).ToString(), "This a task description"));
-          }
+        }
 
-      }
+        /// <summary>
+        /// creates 5 test tasks and adds them to the tasks list
+        /// </summary>
+        public void createTasks()
+        {
 
-  }
+            for (int i = 0; i < 10; i++)
+            {
+                _Tasks.Add(new MainTask("Task " + (i + 1).ToString(), "This a task description"));
+            }
+
+        }
+        #endregion
+
+        private List<MainTask> tasks;
+        private IDataStorage dataStorage;
+
+        public int SaveMainTask(string subject, string description)
+        {
+            return 0;
+        }
+
+        public int SaveMainTask(int id, string subject, string description)
+        {
+            return 0;
+        }
+
+
+        public int SaveSubTask(string subject)
+        {
+            return 0;
+        }
+
+        public int SaveSubTask(int id, string subject)
+        {
+            return 0;
+        }
+
+        public List<MainTask> GetAllMainTasks()
+        {
+            return new List<MainTask>();
+        }
+
+        public void CheckMainTask(int id) { }
+        public void CheckSubTask(int id) { }
+
+        public void DeleteSubTask(int subTaskID) { }
+        public void DeleteMainTask(int mainTaskID) { }
+        public void DeleteAllTasks() { }
+
+    }
 
 }
