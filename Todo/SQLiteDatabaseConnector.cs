@@ -38,11 +38,27 @@ namespace Todo
 
             List<SubTask> subTasks = this.getAllSubTasksForMainTask(mainTaskID);
             return new MainTask(
-              Convert.ToInt32(sqlData["mainTask_id"]),
-              Convert.ToString(sqlData["subject"]),
-              Convert.ToString(sqlData["description"]),
-              subTasks,
-              Convert.ToBoolean(sqlData["done"])
+                Convert.ToInt32(sqlData["mainTask_id"]),
+                Convert.ToString(sqlData["subject"]),
+                Convert.ToString(sqlData["description"]),
+                subTasks,
+                Convert.ToBoolean(sqlData["done"])
+            );
+        }
+        public SubTask GetSubTask(int subTaskID)
+        {
+            SQLiteCommand query = new SQLiteCommand("select * from SubTasks where subTask_id = @subTaskID");
+            query.Parameters.AddWithValue("@subTaskID", subTaskID);
+
+            SQLiteDataReader sqlData = this.doQuery(query);
+            sqlData.Read();
+            if (!sqlData.HasRows) { throw new Exception(String.Format("keine SubTask mit der ID {0} gefunden!", subTaskID)); }
+
+            return new SubTask(
+                Convert.ToInt32(sqlData["subTask_id"]),
+                Convert.ToInt32(sqlData["mainTask_id"]),
+                Convert.ToString(sqlData["subject"]),
+                Convert.ToBoolean(sqlData["done"])
             );
         }
         public List<MainTask> GetAllMainTasks()

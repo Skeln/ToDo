@@ -14,7 +14,7 @@ namespace Todo
 
             SQLiteDatabaseConnector dataStorage = new SQLiteDatabaseConnector();
             //Application.Run(new TaskGUI());
-            Application.Run(new TodoGUI(new TestTaskController()));
+            Application.Run(new TodoGUI(new TaskController(dataStorage)));
 
             dataStorage.DeleteMainTask(2);
             MainTask mt = new MainTask("Subject", "Description");
