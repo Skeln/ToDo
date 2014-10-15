@@ -15,6 +15,8 @@ namespace Todo
 
         // TODO: This needs to be replaced with the actual TaskController
         private TestTaskController testTasksController;
+        private ITodoController todoController;
+
         private Form taskForm;
         private static TodoGUI _instance = null;
 
@@ -30,15 +32,15 @@ namespace Todo
         /// Gui constructor for the TestTaskController
         /// </summary>
         /// <param name="t">instance of an task controller</param>
-        public TodoGUI(TestTaskController t)
+        public TodoGUI(ITodoController t)
         {
 
             InitializeComponent();
 
             _instance           = this;
-            testTasksController = t;
+            todoController = t;
 
-            InitializeControls();
+            //InitializeControls();
 
         }
 
