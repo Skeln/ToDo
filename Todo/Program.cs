@@ -16,13 +16,13 @@ namespace Todo
             //Application.Run(new TaskGUI());
             Application.Run(new TodoGUI(new TestTaskController()));
 
-            dataStorage.deleteMainTask(2);
+            dataStorage.DeleteMainTask(2);
             MainTask mt = new MainTask("Subject", "Description");
             //mt = dataStorage.getMainTask(dataStorage.saveMainTask(mt));
             mt.addSubTask("SubTaskSubject");
-            mt = dataStorage.getMainTask(dataStorage.saveMainTask(mt));
+            mt = dataStorage.GetMainTask(dataStorage.SaveMainTask(mt));
             mt.removeSubTask(2);
-            mt = dataStorage.getMainTask(dataStorage.saveMainTask(mt));
+            mt = dataStorage.GetMainTask(dataStorage.SaveMainTask(mt));
             //printMainTask(mt);
             //Console.WriteLine(mt.ID);
 

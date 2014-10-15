@@ -27,7 +27,7 @@ namespace Todo
 
 
         // PUBLIC Methods
-        public MainTask getMainTask(int mainTaskID)
+        public MainTask GetMainTask(int mainTaskID)
         {
             SQLiteCommand query = new SQLiteCommand("select * from MainTasks where mainTask_id = @mainTaskID");
             query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
@@ -45,7 +45,7 @@ namespace Todo
               Convert.ToBoolean(sqlData["done"])
             );
         }
-        public List<MainTask> getAllMainTasks()
+        public List<MainTask> GetAllMainTasks()
         {
             List<MainTask> mainTasks = new List<MainTask>();
 
@@ -55,26 +55,26 @@ namespace Todo
             while (sqlData.Read())
             {
                 int mainTaskID = Convert.ToInt32(sqlData["mainTask_id"]);
-                mainTasks.Add(this.getMainTask(mainTaskID));
+                mainTasks.Add(this.GetMainTask(mainTaskID));
             }
 
             return mainTasks;
         }
-        public void deleteMainTask(int mainTaskID)
+        public void DeleteMainTask(int mainTaskID)
         {
             SQLiteCommand query = new SQLiteCommand("delete from MainTasks where mainTask_id = @mainTaskID");
             query.Parameters.AddWithValue("@mainTaskID", mainTaskID);
 
             this.doQuery(query);
         }
-        public void deleteSubTask(int subTaskID)
+        public void DeleteSubTask(int subTaskID)
         {
             SQLiteCommand query = new SQLiteCommand("delete from SubTasks where subTask_id = @subTaskID");
             query.Parameters.AddWithValue("@subTaskID", subTaskID);
 
             this.doQuery(query);
         }
-        public int saveMainTask(MainTask mainTask)
+        public int SaveMainTask(MainTask mainTask)
         {
             if (mainTask.ID > 0)
             {
@@ -86,7 +86,7 @@ namespace Todo
                 return this.insertMainTask(mainTask);
             }
         }
-        public int saveSubTask(SubTask subTask)
+        public int SaveSubTask(SubTask subTask)
         {
             if (subTask.ID > 0)
             {
@@ -120,14 +120,14 @@ namespace Todo
             foreach (SubTask subTask in mainTask.SubTasks)
             {
                 newSubTaskIDs.Add(subTask.ID);
-                this.saveSubTask(subTask);
+                this.SaveSubTask(subTask);
             }
             //delete obsolete SubTasks
             List<int> oldSubTaskIDs = this.getAllSubTaskIDs(mainTask.ID);
             IEnumerable<int> obsoleteSubTaskIDs = oldSubTaskIDs.Except(newSubTaskIDs);
             foreach (int obsoleteSubTaskID in obsoleteSubTaskIDs)
             {
-                this.deleteSubTask(obsoleteSubTaskID);
+                this.DeleteSubTask(obsoleteSubTaskID);
             }
 
             this.doQuery(query);
