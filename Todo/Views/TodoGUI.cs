@@ -28,6 +28,14 @@ namespace Todo
             }
         }
 
+        public ITodoController GetTodoController
+        {
+            get 
+            {
+                return todoController;
+            }
+        }
+
         /// <summary>
         /// Gui constructor for the TestTaskController
         /// </summary>
@@ -37,26 +45,30 @@ namespace Todo
 
             InitializeComponent();
 
-            _instance           = this;
+            _instance      = this;
             todoController = t;
 
-            //InitializeControls();
+            AddControls();
 
         }
 
         /// <summary>
         /// Adds a main task control for each task to the main task panel
         /// </summary>
-        public void InitializeControls()
+        public void AddControls()
         {
 
-            testTasksController.Tasks.ForEach(delegate(MainTask m)
+            todoController.GetAllMainTasks().ForEach(delegate(MainTask m)
             {
                 AddMainTaskComponent(m);
             });
 
             mainTaskPanel.Focus();
 
+        }
+
+        public void UpdateControls(int mainTaskId) 
+        {
         }
 
         /// <summary>
