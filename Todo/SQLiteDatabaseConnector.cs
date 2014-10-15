@@ -16,8 +16,8 @@ namespace Todo
         // Constructor
         public SQLiteDatabaseConnector()
         {
-            //string dbFilename = "ToDo.db";
-            string dbFilename = @"d:\programme\sqlite\test.db";
+            string dbFilename = "ToDo.db";
+            //string dbFilename = @"d:\programme\sqlite\test.db";
 
             if (!File.Exists(dbFilename)) { this.setupSQLiteDatabase(dbFilename); }
 
