@@ -52,9 +52,9 @@ namespace Todo
         public void createTasks()
         {
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
-                _Tasks.Add(new MainTask("Task " + (i + 1).ToString(), "This a task description"));
+                tasks.Add(new MainTask("Task " + (i + 1).ToString(), "This a task description"));
             }
 
         }
@@ -63,13 +63,28 @@ namespace Todo
         private List<MainTask> tasks;
         private IDataStorage dataStorage;
 
+        public TestTaskController() 
+        {
+            tasks = new List<MainTask>();
+            createTasks(); 
+        }
+
         public int SaveMainTask(string subject, string description)
         {
-            return 0;
+            tasks.Add(new MainTask(tasks.Count, subject, description, new List<SubTask>(), false));
+            return tasks.Count;
         }
 
         public int SaveMainTask(int id, string subject, string description)
         {
+            MainTask mt = tasks.Find(delegate(MainTask m)
+            {
+                return m.ID == id;
+            });
+
+            mt.Subject = subject;
+            mt.Description = description;
+
             return 0;
         }
 
@@ -86,7 +101,7 @@ namespace Todo
 
         public List<MainTask> GetAllMainTasks()
         {
-            return new List<MainTask>();
+            return tasks;
         }
 
         public void CheckMainTask(int id) { }
