@@ -1,11 +1,4 @@
-﻿/// <summary>
-/// This class is only here for creating Test Data 
-/// </summary>
-/// <author>
-/// Markus Waitl
-/// </author>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +8,22 @@ namespace Todo
 {
     class TaskController : ITodoController
     {
+
+        #region fields
         private List<MainTask> tasks;
         private IDataStorage dataStorage;
+        #endregion
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="dataStorage"></param>
         public TaskController(IDataStorage dataStorage)
         {
             this.dataStorage = dataStorage;
         }
 
+        #region save
         public int SaveMainTask(string subject, string description)
         {
             return dataStorage.SaveMainTask(new MainTask(subject, description));
@@ -36,7 +37,6 @@ namespace Todo
             return dataStorage.SaveMainTask(mainTask);
         }
 
-
         public int SaveSubTask(string subject, int mainTaskID)
         {
             return dataStorage.SaveSubTask(new SubTask(subject, mainTaskID));
@@ -45,14 +45,29 @@ namespace Todo
         public int SaveSubTask(int id, string subject)
         {
             SubTask subTask = dataStorage.GetSubTask(id);
+            subTask.Subject = subject;
             return dataStorage.SaveSubTask(subTask);
         }
+        #endregion
 
+        #region get
         public List<MainTask> GetAllMainTasks()
         {
             return dataStorage.GetAllMainTasks(); ;
         }
 
+        public MainTask GetMainTask(int mainTaskID) 
+        {
+            return dataStorage.GetMainTask(mainTaskID);
+        }
+
+        public SubTask GetSubTask(int subTaskID) 
+        { 
+            return dataStorage.GetSubTask(subTaskID);
+        }
+        #endregion
+
+        #region check
         public void CheckMainTask(int id)
         {
             MainTask mainTask = dataStorage.GetMainTask(id);
@@ -81,7 +96,9 @@ namespace Todo
             }
             dataStorage.SaveSubTask(subTask);
         }
+        #endregion
 
+        #region delete
         public void DeleteSubTask(int subTaskID)
         {
             dataStorage.DeleteSubTask(subTaskID);
@@ -100,5 +117,6 @@ namespace Todo
                 dataStorage.DeleteMainTask(mainTask.ID);
             }
         }
+        #endregion
     }
 }
