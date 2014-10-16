@@ -96,7 +96,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteDatabaseConnector.cs" />
     <Compile Include="SubTask.cs" />
-    <Compile Include="TestTaskController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
