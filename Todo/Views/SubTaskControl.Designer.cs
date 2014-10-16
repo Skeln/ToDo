@@ -28,63 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-      this.SubTaskLabel = new System.Windows.Forms.Label();
-      this.doneCkBx = new System.Windows.Forms.CheckBox();
-      this.removeSubTaskBtn = new System.Windows.Forms.Button();
-      this.SuspendLayout();
-      // 
-      // SubTaskLabel
-      // 
-      this.SubTaskLabel.AutoSize = true;
-      this.SubTaskLabel.Font = new System.Drawing.Font("Arial", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.SubTaskLabel.Location = new System.Drawing.Point(8, 6);
-      this.SubTaskLabel.Name = "SubTaskLabel";
-      this.SubTaskLabel.Size = new System.Drawing.Size(54, 13);
-      this.SubTaskLabel.TabIndex = 0;
-      this.SubTaskLabel.Text = "SubTask";
-      // 
-      // doneCkBx
-      // 
-      this.doneCkBx.AutoSize = true;
-      this.doneCkBx.Location = new System.Drawing.Point(381, 4);
-      this.doneCkBx.Name = "doneCkBx";
-      this.doneCkBx.Size = new System.Drawing.Size(52, 17);
-      this.doneCkBx.TabIndex = 1;
-      this.doneCkBx.Text = "Done";
-      this.doneCkBx.UseVisualStyleBackColor = true;
-      // 
-      // removeSubTaskBtn
-      // 
-      this.removeSubTaskBtn.BackColor = System.Drawing.Color.Crimson;
-      this.removeSubTaskBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-      this.removeSubTaskBtn.FlatAppearance.BorderSize = 0;
-      this.removeSubTaskBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.removeSubTaskBtn.Font = new System.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.removeSubTaskBtn.ForeColor = System.Drawing.Color.White;
-      this.removeSubTaskBtn.Location = new System.Drawing.Point(356, 3);
-      this.removeSubTaskBtn.Name = "removeSubTaskBtn";
-      this.removeSubTaskBtn.Size = new System.Drawing.Size(19, 19);
-      this.removeSubTaskBtn.TabIndex = 2;
-      this.removeSubTaskBtn.Text = "-";
-      this.removeSubTaskBtn.UseVisualStyleBackColor = false;
-      // 
-      // SubTaskControl
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.removeSubTaskBtn);
-      this.Controls.Add(this.doneCkBx);
-      this.Controls.Add(this.SubTaskLabel);
-      this.Name = "SubTaskControl";
-      this.Size = new System.Drawing.Size(437, 27);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.subTaskLabel = new System.Windows.Forms.Label();
+            this.doneCkBx = new System.Windows.Forms.CheckBox();
+            this.removeSubTaskBtn = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // subTaskLabel
+            // 
+            this.subTaskLabel.AutoSize = true;
+            this.subTaskLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.subTaskLabel.Font = new System.Drawing.Font("Arial", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subTaskLabel.Location = new System.Drawing.Point(8, 6);
+            this.subTaskLabel.Name = "subTaskLabel";
+            this.subTaskLabel.Size = new System.Drawing.Size(54, 13);
+            this.subTaskLabel.TabIndex = 0;
+            this.subTaskLabel.Text = "SubTask";
+            this.subTaskLabel.Click += new System.EventHandler(this.editSubTask_Click);
+            // 
+            // doneCkBx
+            // 
+            this.doneCkBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doneCkBx.AutoSize = true;
+            this.doneCkBx.Location = new System.Drawing.Point(420, 4);
+            this.doneCkBx.Name = "doneCkBx";
+            this.doneCkBx.Size = new System.Drawing.Size(52, 17);
+            this.doneCkBx.TabIndex = 1;
+            this.doneCkBx.Text = "Done";
+            this.doneCkBx.UseVisualStyleBackColor = true;
+            this.doneCkBx.Click += new System.EventHandler(this.subTaskCheck_Click);
+            // 
+            // removeSubTaskBtn
+            // 
+            this.removeSubTaskBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeSubTaskBtn.BackColor = System.Drawing.Color.Crimson;
+            this.removeSubTaskBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.removeSubTaskBtn.FlatAppearance.BorderSize = 0;
+            this.removeSubTaskBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeSubTaskBtn.Font = new System.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeSubTaskBtn.ForeColor = System.Drawing.Color.White;
+            this.removeSubTaskBtn.Location = new System.Drawing.Point(395, 3);
+            this.removeSubTaskBtn.Name = "removeSubTaskBtn";
+            this.removeSubTaskBtn.Size = new System.Drawing.Size(19, 19);
+            this.removeSubTaskBtn.TabIndex = 2;
+            this.removeSubTaskBtn.Text = "-";
+            this.removeSubTaskBtn.UseVisualStyleBackColor = false;
+            this.removeSubTaskBtn.Click += new System.EventHandler(this.removeSubTaskBtn_Click);
+            // 
+            // SubTaskControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(this.removeSubTaskBtn);
+            this.Controls.Add(this.doneCkBx);
+            this.Controls.Add(this.subTaskLabel);
+            this.Name = "SubTaskControl";
+            this.Size = new System.Drawing.Size(480, 27);
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label SubTaskLabel;
+        private System.Windows.Forms.Label subTaskLabel;
         private System.Windows.Forms.CheckBox doneCkBx;
         private System.Windows.Forms.Button removeSubTaskBtn;
     }

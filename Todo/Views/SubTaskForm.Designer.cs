@@ -1,4 +1,4 @@
-﻿namespace Todo.Views
+﻿namespace Todo
 {
     partial class SubTaskForm
     {
