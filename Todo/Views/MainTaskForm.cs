@@ -53,18 +53,17 @@ namespace Todo
             {
 
                 MainTask mt    = _mainTaskControl.CtrlMainTask;
-                mt.Subject     = this.subjectTextBox.Text;
-                mt.Description = this.descriptionTextBox.Text;
-                _mainTaskControl.Update();
+                TodoGUI.Instance.GetTodoController.SaveMainTask(mt.ID, this.subjectTextBox.Text, this.descriptionTextBox.Text);
 
             }
             else 
             { 
                 //TODO: this should go into the controller 
                 int mainTaskId = TodoGUI.Instance.GetTodoController.SaveMainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
-                TodoGUI.Instance.UpdateControls(mainTaskId);
+                TodoGUI.Instance.AddMainTaskControls(TodoGUI.Instance.GetTodoController.GetMainTask(mainTaskId));
             }
 
+            _mainTaskControl.Update();
             this.Dispose();
 
         }
