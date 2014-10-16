@@ -52,11 +52,13 @@
             // 
             this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.descriptionTextBox.Location = new System.Drawing.Point(12, 43);
+            this.descriptionTextBox.BackColor = System.Drawing.Color.LightGray;
+            this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionTextBox.Location = new System.Drawing.Point(15, 42);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
-            this.descriptionTextBox.Size = new System.Drawing.Size(556, 20);
+            this.descriptionTextBox.Size = new System.Drawing.Size(553, 24);
             this.descriptionTextBox.TabIndex = 1;
             // 
             // checkDoneCkBx
@@ -85,7 +87,7 @@
             this.removeTaskBtn.Name = "removeTaskBtn";
             this.removeTaskBtn.Size = new System.Drawing.Size(30, 30);
             this.removeTaskBtn.TabIndex = 3;
-            this.removeTaskBtn.Text = "-";
+            this.removeTaskBtn.Text = "X";
             this.removeTaskBtn.UseVisualStyleBackColor = false;
             this.removeTaskBtn.Click += new System.EventHandler(this.removeTaskBtn_Click);
             // 
@@ -112,10 +114,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SubTaskPanel.AutoScroll = true;
-            this.SubTaskPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SubTaskPanel.Location = new System.Drawing.Point(12, 70);
+            this.SubTaskPanel.BackColor = System.Drawing.Color.LightGray;
+            this.SubTaskPanel.Location = new System.Drawing.Point(0, 70);
+            this.SubTaskPanel.Margin = new System.Windows.Forms.Padding(0);
             this.SubTaskPanel.Name = "SubTaskPanel";
-            this.SubTaskPanel.Size = new System.Drawing.Size(556, 63);
+            this.SubTaskPanel.Size = new System.Drawing.Size(568, 46);
             this.SubTaskPanel.TabIndex = 5;
             // 
             // MainTaskControl
@@ -132,7 +135,7 @@
             this.Controls.Add(this.taskName);
             this.DoubleBuffered = true;
             this.Name = "MainTaskControl";
-            this.Size = new System.Drawing.Size(585, 145);
+            this.Size = new System.Drawing.Size(585, 125);
             this.ResumeLayout(false);
             this.PerformLayout();
 
