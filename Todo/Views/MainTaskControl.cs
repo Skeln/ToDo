@@ -13,15 +13,7 @@ namespace Todo
     partial class MainTaskControl : UserControl
     {
 
-        private MainTask _mainTask;
-        
-        public MainTask CtrlMainTask 
-        {
-            get
-            {
-                return _mainTask;
-            }
-        }
+        public MainTask CtrlMainTask { get; private set; }
 
         public MainTaskControl()
         {
@@ -31,11 +23,11 @@ namespace Todo
         public MainTaskControl(MainTask m)
         {
             InitializeComponent();
-            _mainTask = m;
+            CtrlMainTask = m;
             SetValues();
             foreach (SubTask s in m.SubTasks) 
             {
-                AddSubTaskComponent(s);
+                AddSubTaskControls(s);
             }
         }
 
@@ -45,16 +37,19 @@ namespace Todo
         /// <param name="m"></param>
         public void Update() 
         {
+
+            CtrlMainTask = TodoGUI.Instance.GetTodoController.GetMainTask(CtrlMainTask.ID);
+            foreach (SubTaskControl stc in this.SubTaskPanel.Controls)
+            {
+                stc.Update();
+            }
+
             SetValues();
+
         }
 
-        /// <summary>
-        /// Fills all GUI field with the Main Tasks Values
-        /// and sets up the visible fields of the form
-        /// </summary>
-        private void SetValues() 
+        public void SetDimensions()
         {
-
             if (CtrlMainTask.SubTasks.Count == 0)
             {
                 SubTaskPanel.Hide();
@@ -79,7 +74,17 @@ namespace Todo
             {
                 this.Height = 45;
             }
+        }
 
+        /// <summary>
+        /// Fills all GUI field with the Main Tasks Values
+        /// and sets up the visible fields of the form
+        /// </summary>
+        private void SetValues() 
+        {
+
+            SetDimensions();
+    
             if (CtrlMainTask.Done)
             {
                 this.BackColor = Color.LightGreen;
@@ -95,10 +100,12 @@ namespace Todo
         /// for given main tasks subtasks
         /// </summary>
         /// <param name="m">sub task object to display</param>
-        public void AddSubTaskComponent(SubTask subTask)
+        public void AddSubTaskControls(SubTask subTask)
         {
 
-            SubTaskControl stc  = new SubTaskControl(subTask);
+            Update();
+
+            SubTaskControl stc  = new SubTaskControl(subTask, this);
             stc.Dock            = DockStyle.Top;
             
             this.SubTaskPanel.Controls.Add(stc);
@@ -111,42 +118,36 @@ namespace Todo
             (new MainTaskForm(this)).ShowDialog();
         }
 
-        private void checkDoneCkBx_CheckedChanged(object sender, EventArgs e)
+        private void checkDoneCkBx_Click(object sender, EventArgs e)
         {
 
             if (((CheckBox)sender).Checked)
             {
                 this.CtrlMainTask.Done = true;
-                // Reorders the current MainTaskComponent
-                //this.Parent.Controls.SetChildIndex(this, this.Parent.Controls.Count - 1);
-            }
-            else
-            { 
-                this.CtrlMainTask.Done = false;
-            }
-
-            if (CtrlMainTask.Done)
-            {
                 this.BackColor = Color.LightGreen;
             }
             else
             { 
+                this.CtrlMainTask.Done = false;
                 this.BackColor = Color.LightGray;
             }
+
+            TodoGUI.Instance.GetTodoController.CheckMainTask(CtrlMainTask.ID);
+            Update();
 
         }
 
         private void removeTaskBtn_Click(object sender, EventArgs e)
         {
 
-            // TODO: call remove Controller Task
+            TodoGUI.Instance.GetTodoController.DeleteMainTask(CtrlMainTask.ID);
             this.Dispose();
 
         }
 
         private void addSubTaskBtn_Click(object sender, EventArgs e)
         {
-            Views.SubTaskForm stf = new Views.SubTaskForm(this);
+            SubTaskForm stf = new SubTaskForm(this);
             stf.ShowDialog();
         }
 
