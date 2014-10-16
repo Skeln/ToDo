@@ -95,6 +95,7 @@
             this.Controls.Add(this.mainTaskPanel);
             this.Controls.Add(this.addTaskButton);
             this.Controls.Add(this.shapeContainer1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TodoGUI";
             this.Text = "ToDo-Application";
