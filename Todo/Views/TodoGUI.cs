@@ -14,7 +14,6 @@ namespace Todo
     {
 
         // TODO: This needs to be replaced with the actual TaskController
-        private TestTaskController testTasksController;
         private ITodoController todoController;
 
         private Form taskForm;
@@ -60,7 +59,7 @@ namespace Todo
 
             todoController.GetAllMainTasks().ForEach(delegate(MainTask m)
             {
-                AddMainTaskComponent(m);
+                AddMainTaskControls(m);
             });
 
             mainTaskPanel.Focus();
@@ -76,7 +75,7 @@ namespace Todo
         /// for given main task object
         /// </summary>
         /// <param name="m">main task object to display</param>
-        public void AddMainTaskComponent(MainTask m)
+        public void AddMainTaskControls(MainTask m)
         {
 
             MainTaskControl mtc = new MainTaskControl(m);
