@@ -43,8 +43,8 @@ namespace Todo
                 this.doneCkBx.Checked = true;
             }
             else
-            { 
-                this.BackColor = Color.LightGray;
+            {
+                this.BackColor = Color.SandyBrown;
                 this.doneCkBx.Checked = false;
             }
         }
@@ -53,8 +53,8 @@ namespace Todo
         {
 
             TodoGUI.Instance.GetTodoController.DeleteSubTask(CtrlSubTask.ID);
-            _mainTaskControl.Update();
             this.Dispose();
+            _mainTaskControl.Update();
 
         }
 
@@ -69,7 +69,7 @@ namespace Todo
             else
             { 
                 CtrlSubTask.Done = false;
-                this.BackColor = Color.LightGray;
+                this.BackColor = Color.SandyBrown;
             }
 
             TodoGUI.Instance.GetTodoController.CheckSubTask(CtrlSubTask.ID);
