@@ -15,7 +15,7 @@ namespace Todo
         private MainTaskControl _mainTaskControl = null;
 
         /// <summary>
-        /// This constructor is used for creating a new MainTask
+        /// This constructor should be used for creating a new MainTask
         /// </summary>
         public MainTaskForm()
         {
@@ -26,7 +26,7 @@ namespace Todo
         }
 
         /// <summary>
-        /// This constructor is used for editing an existing MainTask
+        /// This constructor should be used for editing an existing MainTask
         /// </summary>
         /// <param name="mt">the MainTask object which should be edited</param>
         public MainTaskForm(MainTaskControl mtc)
@@ -54,7 +54,7 @@ namespace Todo
 
                 MainTask mt    = _mainTaskControl.CtrlMainTask;
                 TodoGUI.Instance.GetTodoController.SaveMainTask(mt.ID, this.subjectTextBox.Text, this.descriptionTextBox.Text);
-
+                _mainTaskControl.Update();
             }
             else 
             { 
@@ -63,7 +63,6 @@ namespace Todo
                 TodoGUI.Instance.AddMainTaskControls(TodoGUI.Instance.GetTodoController.GetMainTask(mainTaskId));
             }
 
-            _mainTaskControl.Update();
             this.Dispose();
 
         }

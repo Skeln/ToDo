@@ -50,22 +50,22 @@ namespace Todo
 
         public void SetDimensions()
         {
-            if (CtrlMainTask.SubTasks.Count == 0)
+            if (CtrlMainTask.SubTasks.Count == 0 && SubTaskPanel.Visible)
             {
                 SubTaskPanel.Hide();
                 this.Height = 80;
             }
-            else 
+            else if(CtrlMainTask.SubTasks.Count > 0 && !SubTaskPanel.Visible)
             {
                 SubTaskPanel.Show();
                 this.Height = 145;
             }
 
-            if (CtrlMainTask.Description == "")
+            if (CtrlMainTask.Description == "" && descriptionTextBox.Visible)
             {
                 descriptionTextBox.Hide();
             }
-            else 
+            else if(CtrlMainTask.Description.Length > 0 && !descriptionTextBox.Visible)
             { 
                 descriptionTextBox.Show();
             }
@@ -84,11 +84,16 @@ namespace Todo
         {
 
             SetDimensions();
-    
+
             if (CtrlMainTask.Done)
             {
                 this.BackColor = Color.LightGreen;
+                this.SubTaskPanel.BackColor = Color.LightGreen;
                 checkDoneCkBx.Checked = true;
+            }
+            else 
+            { 
+                this.SubTaskPanel.BackColor = Color.LightGray;
             }
             
             taskName.Text           = CtrlMainTask.Subject;
@@ -130,6 +135,7 @@ namespace Todo
             { 
                 this.CtrlMainTask.Done = false;
                 this.BackColor = Color.LightGray;
+                this.SubTaskPanel.BackColor = Color.LightGray;
             }
 
             TodoGUI.Instance.GetTodoController.CheckMainTask(CtrlMainTask.ID);
