@@ -70,7 +70,7 @@
             this.checkDoneCkBx.TabIndex = 2;
             this.checkDoneCkBx.Text = "Done";
             this.checkDoneCkBx.UseVisualStyleBackColor = true;
-            this.checkDoneCkBx.CheckedChanged += new System.EventHandler(this.checkDoneCkBx_CheckedChanged);
+            this.checkDoneCkBx.Click += new System.EventHandler(this.checkDoneCkBx_Click);
             // 
             // removeTaskBtn
             // 
@@ -111,6 +111,7 @@
             this.SubTaskPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubTaskPanel.AutoScroll = true;
             this.SubTaskPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.SubTaskPanel.Location = new System.Drawing.Point(12, 70);
             this.SubTaskPanel.Name = "SubTaskPanel";
