@@ -50,30 +50,35 @@ namespace Todo
 
         public void SetDimensions()
         {
-            if (CtrlMainTask.SubTasks.Count == 0 && SubTaskPanel.Visible)
+            
+            int subTasks = CtrlMainTask.SubTasks.Count;
+            int subTaskPanelHeight = (subTasks * 25) < 75 ? (subTasks * 25) : 75;
+            int mainPanelHeight = 85;
+
+            if (subTasks== 0 && SubTaskPanel.Visible)
             {
                 SubTaskPanel.Hide();
-                this.Height = 80;
+                mainPanelHeight = 80;
             }
             else if(CtrlMainTask.SubTasks.Count > 0 && !SubTaskPanel.Visible)
             {
                 SubTaskPanel.Show();
-                this.Height = 145;
             }
 
             if (CtrlMainTask.Description == "" && descriptionTextBox.Visible)
             {
                 descriptionTextBox.Hide();
+                SubTaskPanel.Location.Offset(new Point(0, -25));
             }
             else if(CtrlMainTask.Description.Length > 0 && !descriptionTextBox.Visible)
-            { 
+            {
                 descriptionTextBox.Show();
+                SubTaskPanel.Location.Offset(new Point(0, 25));
             }
 
-            if (CtrlMainTask.SubTasks.Count == 0 && CtrlMainTask.Description == "") 
-            {
-                this.Height = 45;
-            }
+            // apply dimensions
+            this.Height = mainPanelHeight + subTaskPanelHeight;
+            this.SubTaskPanel.Height = subTaskPanelHeight;
         }
 
         /// <summary>

@@ -50,15 +50,14 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.descriptionTextBox.BackColor = System.Drawing.Color.LightGray;
             this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.descriptionTextBox.Location = new System.Drawing.Point(15, 42);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
-            this.descriptionTextBox.Size = new System.Drawing.Size(553, 24);
+            this.descriptionTextBox.Size = new System.Drawing.Size(553, 25);
             this.descriptionTextBox.TabIndex = 1;
             // 
             // checkDoneCkBx
@@ -135,7 +134,7 @@
             this.Controls.Add(this.taskName);
             this.DoubleBuffered = true;
             this.Name = "MainTaskControl";
-            this.Size = new System.Drawing.Size(585, 125);
+            this.Size = new System.Drawing.Size(585, 127);
             this.ResumeLayout(false);
             this.PerformLayout();
 
