@@ -30,5 +30,12 @@ namespace Todo
             this.Done = done;
         }
 
+        public bool validate()
+        {
+            if (this.Subject.Length == 0) { return false; }
+
+            return true;
+        }
+
     }
 }

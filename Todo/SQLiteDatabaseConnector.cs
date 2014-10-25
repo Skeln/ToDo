@@ -92,6 +92,8 @@ namespace Todo
         }
         public int SaveMainTask(MainTask mainTask)
         {
+            if (!mainTask.validate()) { throw new ArgumentException("MainTask must be valid!", "mainTask"); }
+
             if (mainTask.ID > 0)
             {
                 this.updateMainTask(mainTask);
@@ -104,6 +106,8 @@ namespace Todo
         }
         public int SaveSubTask(SubTask subTask)
         {
+            if (!subTask.validate()) { throw new ArgumentException("SubTask must be valid!", "subTask"); }
+
             if (subTask.ID > 0)
             {
                 this.updateSubTask(subTask);

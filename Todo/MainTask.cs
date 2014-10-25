@@ -55,6 +55,16 @@ namespace Todo
         }
 
         // Methods
+        public bool validate()
+        {
+            if (this.Subject.Length == 0) { return false; }
+            foreach (SubTask subTask in this.SubTasks)
+            {
+                if (!subTask.validate()) { return false; }
+            }
+
+            return true;
+        }
         public void addSubTask(string subject)
         {
             SubTask newSubTask = new SubTask(subject, this.ID);
