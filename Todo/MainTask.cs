@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Todo
 {
-    class MainTask
+    class MainTask : Task
     {
-        public int ID { get; private set; }
-        public string Subject { get; set; }
         public string Description { get; set; }
         public List<SubTask> SubTasks { get; private set; }
+
         private bool _done;
         public bool Done
         {
@@ -65,6 +64,7 @@ namespace Todo
 
             return true;
         }
+
         public void addSubTask(string subject)
         {
             SubTask newSubTask = new SubTask(subject, this.ID);
