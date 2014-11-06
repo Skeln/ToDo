@@ -13,7 +13,8 @@ namespace Todo
         {
 
             SQLiteDatabaseConnector dataStorage = new SQLiteDatabaseConnector();
-            Application.Run(new TodoGUI(new TaskController(dataStorage)));
+            // Application.Run(new TodoGUI(new TaskController(dataStorage)));
+            TodoTUI t = new TodoTUI(new TaskController(dataStorage), args);
 
         }
 

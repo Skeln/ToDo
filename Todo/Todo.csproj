@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BA523E87-69AD-405E-A0BB-34BE2BE16428}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Todo</RootNamespace>
     <AssemblyName>Todo</AssemblyName>
@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITodoController.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="TaskController.cs" />
+    <Compile Include="TodoTUI.cs" />
     <Compile Include="Views\MainTaskControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
