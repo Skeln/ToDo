@@ -52,15 +52,32 @@ namespace Todo
             if (_mainTaskControl != null)
             {
 
+                // editing tasks
                 MainTask mt    = _mainTaskControl.CtrlMainTask;
-                TodoGUI.Instance.GetTodoController.SaveMainTask(mt.ID, this.subjectTextBox.Text, this.descriptionTextBox.Text);
-                _mainTaskControl.Update();
+                try
+                {
+                    TodoGUI.Instance.GetTodoController.SaveMainTask(mt.ID, this.subjectTextBox.Text, this.descriptionTextBox.Text);
+                    _mainTaskControl.Update();
+                }
+                catch (ArgumentException) {
+                    MessageBox.Show("Task could not be saved. Did you fill out the title?");
+                    return;
+                }
+
             }
             else 
             { 
-                //TODO: this should go into the controller 
-                int mainTaskId = TodoGUI.Instance.GetTodoController.SaveMainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
-                TodoGUI.Instance.AddMainTaskControls(TodoGUI.Instance.GetTodoController.GetMainTask(mainTaskId));
+                // creating new tasks
+                try 
+                {
+                    int mainTaskId = TodoGUI.Instance.GetTodoController.SaveMainTask(this.subjectTextBox.Text, this.descriptionTextBox.Text);
+                    TodoGUI.Instance.AddMainTaskControls(TodoGUI.Instance.GetTodoController.GetMainTask(mainTaskId));
+                }
+                catch (ArgumentException) {
+                    MessageBox.Show("Task could not be saved. Did you fill out the title?");
+                    return;
+                }
+
             }
 
             this.Dispose();

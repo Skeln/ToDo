@@ -39,13 +39,30 @@ namespace Todo
         {
             if (_subTaskControl == null)
             {
-                int subTaskId = TodoGUI.Instance.GetTodoController.SaveSubTask(this.subjectTextBox.Text, _mainTaskControl.CtrlMainTask.ID);
-                _mainTaskControl.AddSubTaskControls(TodoGUI.Instance.GetTodoController.GetSubTask(subTaskId));
+                try
+                {
+                    int subTaskId = TodoGUI.Instance.GetTodoController.SaveSubTask(this.subjectTextBox.Text, _mainTaskControl.CtrlMainTask.ID);
+                    _mainTaskControl.AddSubTaskControls(TodoGUI.Instance.GetTodoController.GetSubTask(subTaskId));
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Task could not be saved. Did you fill out the title?");
+                    return;
+                }
             }
             else
             {
-                TodoGUI.Instance.GetTodoController.SaveSubTask(_subTaskControl.CtrlSubTask.ID, this.subjectTextBox.Text);
-                _mainTaskControl.Update();
+
+                try
+                {
+                    TodoGUI.Instance.GetTodoController.SaveSubTask(_subTaskControl.CtrlSubTask.ID, this.subjectTextBox.Text);
+                    _mainTaskControl.Update();
+                }
+                catch (ArgumentException) {
+                    MessageBox.Show("Task could not be saved. Did you fill out the title?");
+                    return;
+                }
+
             }
             this.Dispose();
 
