@@ -30,7 +30,8 @@ namespace Todo
 
             InitializeComponent();
             _mainTaskControl = mc;
-            _subTaskControl  = stc; 
+            _subTaskControl  = stc;
+            this.subjectTextBox.Text = stc.CtrlSubTask.Subject;
             this.Text = "Edit subtask";
 
         }
