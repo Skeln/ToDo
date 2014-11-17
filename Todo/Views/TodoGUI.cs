@@ -66,8 +66,9 @@ namespace Todo
 
         }
 
-        public void UpdateControls(int mainTaskId) 
+        public void RemoveControls() 
         {
+            mainTaskPanel.Controls.Clear();
         }
 
         /// <summary>
@@ -109,6 +110,16 @@ namespace Todo
 
             taskForm.ShowDialog();
 
+        }
+
+        private void delete_btn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete all Tasks?", "Delete all",MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                todoController.DeleteAllTasks();
+                RemoveControls();
+            }
         }
 
     }

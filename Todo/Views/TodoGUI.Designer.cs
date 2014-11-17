@@ -32,6 +32,7 @@
             this.mainTaskPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.delete_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addTaskButton
@@ -86,12 +87,26 @@
             this.lineShape1.Y1 = 52;
             this.lineShape1.Y2 = 53;
             // 
+            // delete_btn
+            // 
+            this.delete_btn.BackColor = System.Drawing.Color.IndianRed;
+            this.delete_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.delete_btn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.delete_btn.Location = new System.Drawing.Point(348, 12);
+            this.delete_btn.Name = "delete_btn";
+            this.delete_btn.Size = new System.Drawing.Size(136, 33);
+            this.delete_btn.TabIndex = 4;
+            this.delete_btn.Text = "Deleta all";
+            this.delete_btn.UseVisualStyleBackColor = false;
+            this.delete_btn.Click += new System.EventHandler(this.delete_btn_Click);
+            // 
             // TodoGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(636, 430);
+            this.Controls.Add(this.delete_btn);
             this.Controls.Add(this.mainTaskPanel);
             this.Controls.Add(this.addTaskButton);
             this.Controls.Add(this.shapeContainer1);
@@ -111,6 +126,7 @@
         private System.Windows.Forms.Button addTaskButton;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private System.Windows.Forms.Button delete_btn;
 
     }
 }
